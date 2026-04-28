@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Final Test</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #121a31;
+      --panel-2: #1a2444;
+      --text: #e8edf9;
+      --muted: #95a3c7;
+      --accent: #7aa2ff;
+      --accent-2: #9f7aea;
+      --success: #4ade80;
+      --error: #fb7185;
+      --warning: #fbbf24;
+      --border: rgba(255,255,255,0.08);
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: "SFMono-Regular", "Consolas", "Menlo", "Monaco", monospace;
+      background:
+        radial-gradient(circle at top left, rgba(122,162,255,0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(159,122,234,0.16), transparent 24%),
+        linear-gradient(180deg, #08101f 0%, #0b1020 100%);
+      color: var(--text);
+      min-height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: min(1100px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 24px 0 60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+      padding: 14px 18px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(18, 26, 49, 0.72);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand .title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+
+    .brand .subtitle {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .status-chip {
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      padding: 8px 12px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .hero,
+    .panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: rgba(18, 26, 49, 0.82);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding: 34px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 22px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      margin: 0 0 14px;
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.1;
+    }
+
+    .hero p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .hero-card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 230px;
+    }
+
+    .hero-card .mini {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .terminal {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: #09101d;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      background: #0d1529;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #334155;
+    }
+
+    .terminal-body {
+      padding: 14px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #c9d6f3;
+      min-height: 160px;
+      white-space: pre-wrap;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    button {
+      border: none;
+      border-radius: 14px;
+      padding: 13px 18px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.15s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 10px 24px rgba(122,162,255,0.22);
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .sidebar,
+    .main {
+      min-width: 0;
+    }
+
+    .panel {
+      padding: 18px;
+    }
+
+    .panel-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .problem-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .problem-item {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      background: rgba(255,255,255,0.03);
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .problem-item:hover {
+      background: rgba(255,255,255,0.05);
+      transform: translateY(-1px);
+    }
+
+    .problem-item.active {
+      border-color: rgba(122,162,255,0.45);
+      background: rgba(122,162,255,0.08);
+    }
+
+    .problem-item.done {
+      border-color: rgba(74, 222, 128, 0.4);
+    }
+
+    .problem-item .num {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .problem-item .name {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .problem-item .meta {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .problem-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .problem-title {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .problem-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .section {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    .section h3 {
+      margin: 0 0 10px;
+      font-size: 15px;
+    }
+
+    .section p, .section li {
+      color: #d4def8;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .io-box {
+      background: #0b1324;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      margin-top: 10px;
+      white-space: pre-wrap;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .answer-wrap {
+      margin-top: 18px;
+    }
+
+    .answer-label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 14px 16px;
+      background: #0b1324;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      outline: none;
+      font-family: inherit;
+      font-size: 14px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input[type="text"]:focus {
+      border-color: rgba(122,162,255,0.5);
+      box-shadow: 0 0 0 4px rgba(122,162,255,0.12);
+    }
+
+    .feedback {
+      min-height: 24px;
+      margin-top: 12px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .feedback.success {
+      color: var(--success);
+    }
+
+    .feedback.error {
+      color: var(--error);
+    }
+
+    .submit-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .judge-log {
+      margin-top: 18px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #08101d;
+      overflow: hidden;
+    }
+
+    .judge-log-head {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+      background: #0c1529;
+    }
+
+    .judge-log-body {
+      padding: 14px;
+      white-space: pre-wrap;
+      line-height: 1.8;
+      min-height: 140px;
+      font-size: 13px;
+      color: #c8d4f0;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .final-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      background:
+        radial-gradient(circle at center, rgba(122,162,255,0.14), transparent 30%),
+        linear-gradient(180deg, rgba(6,10,18,0.78), rgba(6,10,18,0.92));
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .final-card {
+      width: min(760px, 100%);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 28px;
+      background: rgba(14, 20, 38, 0.96);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .final-card::before {
+      content: "";
+      position: absolute;
+      inset: -20% auto auto -10%;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(122,162,255,0.18), transparent 70%);
+      pointer-events: none;
+    }
+
+    .final-status {
+      color: var(--success);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .typewriter {
+      font-size: clamp(22px, 3.5vw, 40px);
+      font-weight: 900;
+      line-height: 1.3;
+      margin: 10px 0 18px;
+      min-height: 100px;
+    }
+
+    .final-message {
+      color: #d8e1f8;
+      line-height: 1.9;
+      font-size: 15px;
+      margin-bottom: 22px;
+      white-space: pre-line;
+    }
+
+    .result-box {
+      border: 1px solid var(--border);
+      background: #0a1223;
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 20px;
+      line-height: 1.8;
+      font-size: 14px;
+      color: #d5dff8;
+    }
+
+    .proposal-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .heart,
+    .confetti {
+      position: fixed;
+      pointer-events: none;
+      z-index: 30;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+    }
+
+    .heart {
+      font-size: 18px;
+      opacity: 0.95;
+      animation-name: floatUp;
+    }
+
+    .confetti {
+      width: 8px;
+      height: 14px;
+      border-radius: 2px;
+      animation-name: fallDown;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(0.8) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-120vh) scale(1.25) rotate(20deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fallDown {
+      0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(520deg);
+        opacity: 0;
+      }
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 20px, 1100px);
+        padding-top: 14px;
+      }
+
+      .hero,
+      .panel,
+      .final-card {
+        padding: 18px;
+      }
+
+      .problem-title {
+        font-size: 20px;
+      }
+
+      .typewriter {
+        min-height: 84px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <div class="brand">
+        <div class="title" id="siteTitle">Final Test Platform</div>
+        <div class="subtitle">Only one candidate. Only one correct answer.</div>
+      </div>
+      <div class="status-chip" id="progressChip">Progress 0 / 3</div>
+    </div>
+
+    <section class="hero" id="heroSection">
+      <div>
+        <h1>최종 테스트에 오신 것을 환영합니다.</h1>
+        <p>
+          이 페이지는 단 한 사람만을 위한 특별한 테스트입니다.
+          모든 문제를 통과하면 최종 결과를 확인할 수 있습니다.
+        </p>
+        <p>
+          제한 시간은 없지만, 정답은 언제나 하나뿐입니다.
+        </p>
+        <div class="btn-row">
+          <button class="btn-primary" id="startBtn">문제 시작</button>
+          <button class="btn-secondary" id="previewBtn">테스트 미리보기</button>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div>
+          <div class="mini">SYSTEM LOG</div>
+          <div class="terminal">
+            <div class="terminal-header">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </div>
+            <div class="terminal-body" id="heroTerminal">
+Initializing challenge...
+Loading memories...
+Preparing hidden test cases...
+Ready.
+            </div>
+          </div>
+        </div>
+        <div class="footer-note">Tip: 모든 정답은 소문자/대문자 구분 없이 처리됩니다.</div>
+      </div>
+    </section>
+
+    <section class="grid hidden" id="workspace">
+      <aside class="sidebar">
+        <div class="panel">
+          <div class="panel-title">문제 목록</div>
+          <div class="problem-list" id="problemList"></div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <div class="panel">
+          <div class="problem-header">
+            <div>
+              <div class="problem-title" id="problemTitle">Problem</div>
+              <div style="color: var(--muted); font-size: 13px;" id="problemSubtitle"></div>
+            </div>
+            <div class="problem-meta">
+              <div class="tag" id="timeLimitTag">Time Limit: 1 sec</div>
+              <div class="tag" id="memoryLimitTag">Memory Limit: 256 MB</div>
+              <div class="tag" id="scoreTag">Score: 100</div>
+            </div>
+          </div>
+
+          <div class="section">
+            <h3>문제 설명</h3>
+            <p id="problemDescription"></p>
+          </div>
+
+          <div class="section">
+            <h3>입력</h3>
+            <div class="io-box" id="problemInput"></div>
+          </div>
+
+          <div class="section">
+            <h3>출력</h3>
+            <div class="io-box" id="problemOutput"></div>
+          </div>
+
+          <div class="section">
+            <h3>예시</h3>
+            <div class="io-box" id="problemExample"></div>
+          </div>
+
+          <div class="answer-wrap">
+            <label class="answer-label" for="answerInput">정답 입력</label>
+            <input type="text" id="answerInput" placeholder="정답을 입력하세요" autocomplete="off" />
+            <div class="feedback" id="feedback"></div>
+
+            <div class="submit-row">
+              <button class="btn-primary" id="submitBtn">Submit</button>
+              <button class="btn-secondary" id="runBtn">Run Code</button>
+            </div>
+          </div>
+
+          <div class="judge-log">
+            <div class="judge-log-head">JUDGE OUTPUT</div>
+            <div class="judge-log-body" id="judgeLog">
+아직 제출된 코드가 없습니다.
+            </div>
+          </div>
+        </div>
+      </main>
+    </section>
+  </div>
+
+  <div class="final-overlay" id="finalOverlay">
+    <div class="final-card">
+      <div class="final-status">All test cases passed.</div>
+      <div class="result-box" id="resultBox">
+Compiling memories...
+Linking future...
+Executing final decision...
+      </div>
+      <div class="typewriter" id="typewriter"></div>
+      <div class="final-message" id="finalMessage"></div>
+      <div class="proposal-actions">
+        <button class="btn-primary" id="celebrateBtn">Yes 💖</button>
+        <button class="btn-secondary" id="replayBtn">처음부터 다시 보기</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* =========================
+       CUSTOMIZE HERE
+       ========================= */
+
+    const CONFIG = {
+      siteTitle: "Final Test Platform",
+      loverName: "OOO",
+      meetingDate: "2023-04-15", // 첫 만난 날
+      todayDate: new Date().toISOString().slice(0, 10),
+      memoryKeywords: ["웃음", "위로", "설렘", "추억"],
+      finalQuestion: "Will you marry me?",
+      finalMessage:
+`사실 이 테스트의 정답은 처음부터 하나였어.
+
+내가 가장 기쁜 순간에도,
+가장 지친 날에도,
+자연스럽게 가장 먼저 떠오르는 사람은 늘 너였어.
+
+앞으로의 모든 계절과 모든 일상,
+그리고 아직 오지 않은 수많은 날들을
+너와 함께하고 싶어.
+
+${"OOO"}, 나와 결혼해줄래?`
+    };
+
+    const PROBLEMS = [
+      {
+        id: 1,
+        key: "days",
+        title: "Two Hearts",
+        subtitle: "함께한 시간을 계산하는 문제",
+        timeLimit: "1 sec",
+        memoryLimit: "256 MB",
+        score: "100",
+        description:
+          `두 사람이 처음 만난 날부터 오늘까지 함께한 일수를 구하시오.
+정답은 정확한 숫자 혹은 아래 예시의 형식과 유사해도 인정된다.`,
+        input:
+          `첫 만난 날짜: ${CONFIG.meetingDate}
+오늘 날짜: ${CONFIG.todayDate}`,
+        output:
+          `두 사람이 함께해온 총 일수`,
+        example:
+          `Input
+2023-04-15
+2026-04-13
+
+Output
+1095`,
+        acceptedAnswers: generateDayAnswers(CONFIG.meetingDate, CONFIG.todayDate),
+        successLog:
+`[INFO] Running submission...
+[INFO] Parsing dates...
+[INFO] Calculating elapsed days...
+[PASS] Sample Test #1
+[PASS] Hidden Test #1
+[PASS] Hidden Test #2
+Result: Accepted`,
+        failMessage: "힌트: 첫 만난 날부터 오늘까지의 날짜 차이를 떠올려봐."
+      },
+      {
+        id: 2,
+        key: "path",
+        title: "Optimal Path",
+        subtitle: "마음을 잇는 최단 경로 문제",
+        timeLimit: "1 sec",
+        memoryLimit: "256 MB",
+        score: "100",
+        description:
+          `한 사람이 다른 한 사람에게 도달하기 위한 최적의 경로를 구하시오.
+단, 경로상에는 다음 요소가 반드시 포함되어야 한다.
+
+${CONFIG.memoryKeywords.join(", ")}
+
+이 문제의 정답은 하나의 단어 또는 짧은 표현으로 제출할 수 있다.`,
+        input:
+          `필수 경유 요소:
+${CONFIG.memoryKeywords.map(v => "- " + v).join("\n")}`,
+        output:
+          `두 사람을 가장 자연스럽게 이어주는 단어`,
+        example:
+          `Input
+웃음
+위로
+설렘
+추억
+
+Output
+사랑`,
+        acceptedAnswers: [
+          "사랑",
+          "love",
+          "우리",
+          "together"
+        ],
+        successLog:
+`[INFO] Running submission...
+[INFO] Validating emotional graph...
+[INFO] Checking required nodes...
+[PASS] Sample Test #1
+[PASS] Hidden Test #1
+Result: Accepted`,
+        failMessage: "힌트: 웃음, 위로, 설렘, 추억을 모두 지나고 나면 남는 건?"
+      },
+      {
+        id: 3,
+        key: "final",
+        title: "Final Decision",
+        subtitle: "단 하나의 정답을 찾는 문제",
+        timeLimit: "∞",
+        memoryLimit: "No Limit",
+        score: "100",
+        description:
+          `다음 조건을 만족하는 평생의 파트너를 찾으시오.
+
+1. 함께 있으면 가장 편안하다.
+2. 기쁜 순간마다 가장 먼저 떠오른다.
+3. 힘든 날에도 곁에 있고 싶다.
+4. 미래를 상상하면 자연스럽게 등장한다.
+
+출력은 단 하나의 정답이다.`,
+        input:
+          `입력은 주어지지 않는다.`,
+        output:
+          `단 하나의 이름 또는 정답`,
+        example:
+          `Input
+-
+
+Output
+${CONFIG.loverName}`,
+        acceptedAnswers: [
+          normalizeText(CONFIG.loverName),
+          "너",
+          "you",
+          "my love",
+          "love"
+        ],
+        successLog:
+`[INFO] Running submission...
+[INFO] Searching candidate space...
+[INFO] Evaluating lifetime compatibility...
+[PASS] Sample Test #1
+[PASS] Hidden Test #1
+[PASS] Hidden Test #2
+[PASS] Hidden Test #3
+Result: Accepted`,
+        failMessage: "힌트: 사실 정답은 늘 한 사람이었어."
+      }
+    ];
+
+    /* =========================
+       APP STATE
+       ========================= */
+
+    const state = {
+      started: false,
+      currentIndex: 0,
+      solved: new Set()
+    };
+
+    const el = {
+      siteTitle: document.getElementById("siteTitle"),
+      heroSection: document.getElementById("heroSection"),
+      workspace: document.getElementById("workspace"),
+      startBtn: document.getElementById("startBtn"),
+      previewBtn: document.getElementById("previewBtn"),
+      heroTerminal: document.getElementById("heroTerminal"),
+      progressChip: document.getElementById("progressChip"),
+      problemList: document.getElementById("problemList"),
+      problemTitle: document.getElementById("problemTitle"),
+      problemSubtitle: document.getElementById("problemSubtitle"),
+      timeLimitTag: document.getElementById("timeLimitTag"),
+      memoryLimitTag: document.getElementById("memoryLimitTag"),
+      scoreTag: document.getElementById("scoreTag"),
+      problemDescription: document.getElementById("problemDescription"),
+      problemInput: document.getElementById("problemInput"),
+      problemOutput: document.getElementById("problemOutput"),
+      problemExample: document.getElementById("problemExample"),
+      answerInput: document.getElementById("answerInput"),
+      feedback: document.getElementById("feedback"),
+      submitBtn: document.getElementById("submitBtn"),
+      runBtn: document.getElementById("runBtn"),
+      judgeLog: document.getElementById("judgeLog"),
+      finalOverlay: document.getElementById("finalOverlay"),
+      resultBox: document.getElementById("resultBox"),
+      typewriter: document.getElementById("typewriter"),
+      finalMessage: document.getElementById("finalMessage"),
+      celebrateBtn: document.getElementById("celebrateBtn"),
+      replayBtn: document.getElementById("replayBtn")
+    };
+
+    init();
+
+    function init() {
+      el.siteTitle.textContent = CONFIG.siteTitle;
+      renderProblemList();
+      renderProblem(PROBLEMS[state.currentIndex]);
+      updateProgress();
+      bindEvents();
+      animateHeroTerminal();
+    }
+
+    function bindEvents() {
+      el.startBtn.addEventListener("click", startTest);
+      el.previewBtn.addEventListener("click", previewMode);
+      el.submitBtn.addEventListener("click", submitAnswer);
+      el.runBtn.addEventListener("click", simulateRun);
+      el.answerInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") submitAnswer();
+      });
+      el.celebrateBtn.addEventListener("click", () => {
+        launchCelebration(45);
+      });
+      el.replayBtn.addEventListener("click", resetAll);
+    }
+
+    function startTest() {
+      state.started = true;
+      el.heroSection.classList.add("hidden");
+      el.workspace.classList.remove("hidden");
+      el.answerInput.focus();
+      updateProgress();
+    }
+
+    function previewMode() {
+      const previewText =
+`Preview Mode Enabled.
+- Problem 1: Date Calculation
+- Problem 2: Emotional Path
+- Problem 3: Final Decision
+
+Hidden test cases are ready.`;
+      el.heroTerminal.textContent = previewText;
+    }
+
+    function animateHeroTerminal() {
+      const lines = [
+        "Initializing challenge...",
+        "Loading memories...",
+        "Preparing hidden test cases...",
+        "Checking final output conditions...",
+        "Ready."
+      ];
+      let idx = 0;
+      el.heroTerminal.textContent = "";
+      const interval = setInterval(() => {
+        if (idx < lines.length) {
+          el.heroTerminal.textContent += lines[idx] + "\n";
+          idx++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 380);
+    }
+
+    function renderProblemList() {
+      el.problemList.innerHTML = "";
+      PROBLEMS.forEach((problem, index) => {
+        const item = document.createElement("div");
+        item.className = "problem-item";
+        if (index === state.currentIndex) item.classList.add("active");
+        if (state.solved.has(problem.id)) item.classList.add("done");
+
+        item.innerHTML = `
+          <div class="num">Problem ${problem.id}</div>
+          <div class="name">${escapeHtml(problem.title)}</div>
+          <div class="meta">${escapeHtml(problem.subtitle)}</div>
+        `;
+
+        item.addEventListener("click", () => {
+          state.currentIndex = index;
+          renderProblemList();
+          renderProblem(problem);
+          clearFeedback();
+        });
+
+        el.problemList.appendChild(item);
+      });
+    }
+
+    function renderProblem(problem) {
+      el.problemTitle.textContent = problem.title;
+      el.problemSubtitle.textContent = problem.subtitle;
+      el.timeLimitTag.textContent = `Time Limit: ${problem.timeLimit}`;
+      el.memoryLimitTag.textContent = `Memory Limit: ${problem.memoryLimit}`;
+      el.scoreTag.textContent = `Score: ${problem.score}`;
+      el.problemDescription.textContent = problem.description;
+      el.problemInput.textContent = problem.input;
+      el.problemOutput.textContent = problem.output;
+      el.problemExample.textContent = problem.example;
+      el.answerInput.value = "";
+      el.judgeLog.textContent = "아직 제출된 코드가 없습니다.";
+      clearFeedback();
+    }
+
+    function simulateRun() {
+      const problem = PROBLEMS[state.currentIndex];
+      el.judgeLog.textContent =
+`[INFO] Compiling...
+[INFO] Running sample tests...
+[INFO] Problem: ${problem.title}
+[WARN] Output is not submitted yet.
+Status: Waiting for final answer...`;
+    }
+
+    function submitAnswer() {
+      const problem = PROBLEMS[state.currentIndex];
+      const input = normalizeText(el.answerInput.value);
+
+      if (!input) {
+        setFeedback("정답을 먼저 입력해줘.", false);
+        return;
+      }
+
+      const accepted = problem.acceptedAnswers.some(ans => normalizeText(ans) === input);
+
+      if (accepted) {
+        state.solved.add(problem.id);
+        renderProblemList();
+        updateProgress();
+        setFeedback("정답입니다. Accepted.", true);
+        el.judgeLog.textContent = problem.successLog;
+
+        if (state.solved.size === PROBLEMS.length) {
+          setTimeout(showFinalProposal, 900);
+          return;
+        }
+
+        setTimeout(() => {
+          const nextIndex = findNextUnsolvedIndex();
+          if (nextIndex !== -1) {
+            state.currentIndex = nextIndex;
+            renderProblemList();
+            renderProblem(PROBLEMS[nextIndex]);
+          }
+        }, 1200);
+      } else {
+        setFeedback(problem.failMessage, false);
+        el.judgeLog.textContent =
+`[INFO] Running submission...
+[FAIL] Sample Test #1
+[DETAIL] Wrong Answer
+[HINT] ${problem.failMessage}
+Result: Wrong Answer`;
+      }
+    }
+
+    function updateProgress() {
+      el.progressChip.textContent = `Progress ${state.solved.size} / ${PROBLEMS.length}`;
+    }
+
+    function setFeedback(message, isSuccess) {
+      el.feedback.textContent = message;
+      el.feedback.className = "feedback " + (isSuccess ? "success" : "error");
+    }
+
+    function clearFeedback() {
+      el.feedback.textContent = "";
+      el.feedback.className = "feedback";
+    }
+
+    function findNextUnsolvedIndex() {
+      return PROBLEMS.findIndex(p => !state.solved.has(p.id));
+    }
+
+    function showFinalProposal() {
+      el.finalOverlay.style.display = "flex";
+      el.resultBox.textContent =
+`Compilation completed successfully.
+Total submissions: ${state.solved.size}
+Accepted ratio: 100%
+Execution time: Lifetime
+Memory usage: Filled with love`;
+
+      el.typewriter.textContent = "";
+      el.finalMessage.textContent = "";
+      typeWriter(CONFIG.finalQuestion, el.typewriter, 90, () => {
+        el.finalMessage.textContent = CONFIG.finalMessage;
+        launchCelebration(30);
+      });
+    }
+
+    function typeWriter(text, target, speed = 80, callback) {
+      let i = 0;
+      const timer = setInterval(() => {
+        target.textContent += text.charAt(i);
+        i++;
+        if (i >= text.length) {
+          clearInterval(timer);
+          if (callback) callback();
+        }
+      }, speed);
+    }
+
+    function launchCelebration(count = 30) {
+      for (let i = 0; i < count; i++) {
+        setTimeout(createHeart, i * 120);
+        setTimeout(createConfetti, i * 80);
+      }
+    }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.textContent = Math.random() > 0.5 ? "💖" : "💜";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.bottom = "-20px";
+      heart.style.animationDuration = (3 + Math.random() * 2.8) + "s";
+      heart.style.fontSize = (16 + Math.random() * 16) + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 6500);
+    }
+
+    function createConfetti() {
+      const confetti = document.createElement("div");
+      confetti.className = "confetti";
+      confetti.style.left = Math.random() * 100 + "vw";
+      confetti.style.top = "-20px";
+      confetti.style.animationDuration = (3.2 + Math.random() * 2.2) + "s";
+
+      const colors = ["#7aa2ff", "#9f7aea", "#4ade80", "#fbbf24", "#fb7185", "#ffffff"];
+      confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+      document.body.appendChild(confetti);
+
+      setTimeout(() => confetti.remove(), 6500);
+    }
+
+    function resetAll() {
+      state.started = false;
+      state.currentIndex = 0;
+      state.solved.clear();
+
+      el.finalOverlay.style.display = "none";
+      el.workspace.classList.add("hidden");
+      el.heroSection.classList.remove("hidden");
+
+      renderProblemList();
+      renderProblem(PROBLEMS[0]);
+      updateProgress();
+      clearFeedback();
+      animateHeroTerminal();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function normalizeText(text) {
+      return String(text)
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, "")
+        .replace(/[.,!?'"`~\-_/\\()[\]{}:;]+/g, "");
+    }
+
+    function generateDayAnswers(startDate, endDate) {
+      const days = calcDaysBetween(startDate, endDate);
+      return [
+        String(days),
+        `${days}일`,
+        `총${days}일`,
+        `함께한날수${days}`,
+        `together${days}days`
+      ];
+    }
+
+    function calcDaysBetween(start, end) {
+      const s = new Date(start + "T00:00:00");
+      const e = new Date(end + "T00:00:00");
+      const diff = e.getTime() - s.getTime();
+      return Math.floor(diff / (1000 * 60 * 60 * 24));
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+  </script>
+</body>
+</html>
